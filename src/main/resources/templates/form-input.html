@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta xmlns:th="http://www.thymeleaf.org" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AVSampling</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link xmlns:th="http://www.thymeleaf.org" rel="stylesheet"
+          href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <link xmlns:th="http://www.thymeleaf.org" rel="stylesheet"
+          href="../static/css/form-elements.css"
+          th:href="@{/css/form-elements.css}">
+    <link xmlns:th="http://www.thymeleaf.org" rel="stylesheet"
+          href="../static/css/style.css"
+          th:href="@{/css/style.css}">
+
+    <!-- Favicon and touch icons -->
+    <!--  <link rel="shortcut icon" href="../static/ico/favicon.png" th:href="@{/ico/favicon.png}">
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../static/ico/apple-touch-icon-144-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../static/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../static/ico/apple-touch-icon-72-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" href="../static/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+
+</head>
+<body>
+<!-- Top content -->
+<div xmlns:th="http://www.thymeleaf.org" class="top-content">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                <form role="form" action="" method="post" class="f1">
+
+                    <h3>AVSampling</h3>
+                    <p>Fill in the form to get results</p>
+                    <div class="f1-steps">
+                        <div class="f1-progress">
+                            <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3"
+                                 style="width: 16.66%;"></div>
+                        </div>
+                        <div class="f1-step active">
+                            <div class="f1-step-icon"><i class="fas fa-globe-africa"></i></div>
+                            <p>General details</p>
+                        </div>
+                        <div class="f1-step">
+                            <div class="f1-step-icon"><i class="fa fa-cog"></i></div>
+                            <p>tool configuration</p>
+                        </div>
+                        <div class="f1-step">
+                            <div class="f1-step-icon"><i class="fab fa-wpforms"></i></i></div>
+                            <p>Assumptions</p>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <h4>Location:</h4>
+                        <div class="form-group">
+                            <label for="countries">Country</label>
+                            <select class="form-control" id="countries">
+                                <option>Country...</option>
+                                <option>Tanzania</option>
+                                <option>Kenya</option>
+                                <option>Uganda</option>
+                                <option>Rwanda</option>
+                                <option>Burundi</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-sub-national">Sub national (Optional)</label>
+                            <input type="text" name="f1-last-name" placeholder="Sub national (Optional)"
+                                   class="f1-last-name form-control" id="f1-sub-national">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-year">Year</label>
+                            <input type="number" name="f1-year" placeholder="Year" class="f1-last-name form-control"
+                                   id="f1-year">
+                        </div>
+                        <div class="f1-buttons">
+                            <button type="button" class="btn btn-next">Next</button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <h4>Please select how do you want to use this tool</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="configureRadios" id="clusterRadios" value="option1" checked>
+                            <label class="form-check-label" for="clusterRadios">
+                                I want to estimate number of clusters to be sampled based on acceptable uncertainty range
+                                for detecting significant CSMF changes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="configureRadios" id="uncertaintyRadio" value="option2">
+                            <label class="form-check-label" for="uncertaintyRadio">
+                                I want to estimate the uncertainty range for Detecting significant CSMF changes based on
+                                the number of cluster i wish to sample
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="sampleSizeOption">Do you want to calculate your sample size in order to be able
+                            to disaggregate your results by male and female?</label>
+                            <select class="form-control" id="sampleSizeOption">
+                                <option>No</option>
+                                <option >Yes</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="populationSizeSelect">Do you know the population size of each eligible clusters?</label>
+                            <select name="populationSizeSelect" class="form-control" id="populationSizeSelect">
+                                <option value="select">Select..</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Fill in the population for the cluster below</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           <table class="table table-striped">
+                                               <thead>
+                                               <td><b>Name of the cluster unit</b></td>
+                                               <td><b>Cluster population size</b></td>
+                                               <td><b>Crud Death Rate(CDR)/1000</b></td>
+                                               <td><b>Expected annual number of death</b></td>
+                                               </thead>
+                                               <tbody>
+                                                <tr>
+                                                    <td>Dar</td>
+                                                    <td> <input type="text" name="popSize"  class="form-control"></td>
+                                                    <td><input type="text" name="cdr"  class="form-control"></td>
+                                                    <td><input type="text" name="numOfDeath"  class="form-control"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Arusha</td>
+                                                    <td> <input type="text" name="popSize"  class="form-control"></td>
+                                                    <td><input type="text" name="cdr"  class="form-control"></td>
+                                                    <td><input type="text" name="numOfDeath"  class="form-control"></td>
+                                                </tr>
+                                               <tr>
+                                                   <td></td>
+                                                   <td> <input type="text" name="popSize"  class="form-control"></td>
+                                                   <td><input type="text" name="cdr"  class="form-control"></td>
+                                                   <td><input type="text" name="numOfDeath"  class="form-control"></td>
+                                               </tr>
+                                               <tr>
+                                                   <td></td>
+                                                   <td> <input type="text" name="popSize"  class="form-control"></td>
+                                                   <td><input type="text" name="cdr"  class="form-control"></td>
+                                                   <td><input type="text" name="numOfDeath"  class="form-control"></td>
+                                               </tr>
+                                               <tr>
+                                                   <td></td>
+                                                   <td> <input type="text" name="popSize"  class="form-control"></td>
+                                                   <td><input type="text" name="cdr"  class="form-control"></td>
+                                                   <td><input type="text" name="numOfDeath"  class="form-control"></td>
+                                               </tr>
+                                               </tbody>
+                                           </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="f1-buttons">
+                            <button type="button" class="btn btn-previous">Previous</button>
+                            <button type="button" class="btn btn-next">Next</button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <h4>Assumptions in your sampling strategy:</h4>
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-power">Power</label>
+                            <input type="text" name="f1-power" placeholder="Power..."
+                                   class="f1-facebook form-control" id="f1-power">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-significance-level">Significance Level</label>
+                            <input type="text" name="f1-significance-level" placeholder="Significance Level..."
+                                   class="f1-twitter form-control" id="f1-significance-level">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-expected-annual-mean-death"></label>
+                            <input type="text" name="f1-expected-annual-mean-death" placeholder="Expected annual mean death per cluster..."
+                                   class="f1-google-plus form-control" id="f1-expected-annual-mean-death">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-k">k</label>
+                            <input type="text" name="f1-k" placeholder="K..."
+                                   class="f1-google-plus form-control" id="f1-k">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-mis">MIS</label>
+                            <input type="text" name="f1-mis" placeholder="MIS..."
+                                   class="f1-google-plus form-control" id="f1-mis">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-years-of-follow-up"></label>
+                            <input type="text" name="f1-years-of-follow-up" placeholder="Years of follow up..."
+                                   class="f1-google-plus form-control" id="f1-years-of-follow-up">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-percentage-of-all-death"></label>
+                            <input type="text" name="f1-percentage-of-all-death" placeholder="Percentage of all death with a MCCD(%)..."
+                                   class="f1-google-plus form-control" id="f1-percentage-of-all-death">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="f1-under-notification"></label>
+                            <input type="text" name="f1-under-notification" placeholder="Under notification and non-response (%)..."
+                                   class="f1-google-plus form-control" id="f1-under-notification">
+                        </div>
+                        <div class="f1-buttons">
+                            <button type="button" class="btn btn-previous">Previous</button>
+                            <button type="submit" class="btn btn-primary" id="btnSubmitModal" onclick="javascript:window.location.href='result.html'">Submit</button>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Javascript -->
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+-->
+
+<script xmlns:th="http://www.thymeleaf.org"
+        src="../static/js/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<script xmlns:th="http://www.thymeleaf.org"
+        src="../static/bootstrap/js/bootstrap.min.js"
+        th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+<script xmlns:th="http://www.thymeleaf.org"
+        src="../static/js/jquery.backstretch.min.js"
+        th:src="@{/js/jquery.backstretch.min.js}"></script>
+<script xmlns:th="http://www.thymeleaf.org"
+        src="../static/js/retina-1.1.0.min.js"
+        th:src="@{/js/retina-1.1.0.min.js}"></script>
+<script xmlns:th="http://www.thymeleaf.org"
+        src="../static/js/scripts.js"
+        th:src="@{/js/scripts.js}"></script>
+
+<!--[if lt IE 10]>
+<script src="../static/js/placeholder.js"
+        xmlns:th="http://www.thymeleaf.org"
+        th:src="@{/js/placeholder.js}">
+
+</script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+        $(document).ready(function(){
+            $("#populationSizeSelect").on('change', function(){
+                $modal = $('#myModal');
+                if($('#populationSizeSelect').val() == 'yes'){
+                    $modal.modal('show');
+                }
+            });
+        });
+
+        $( "#btnSubmitModal" ).click(function() {
+            var field1value = $( "#f1-under-notification" ).val()
+           window.location.href ="result.html";
+        });
+    </script>
+</body>
+</html>
